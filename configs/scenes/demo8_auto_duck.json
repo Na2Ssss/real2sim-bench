@@ -1,0 +1,42 @@
+{
+  "scene_id": "demo8_auto_duck",
+  "title": "DEMO #8 AUTOLab | Orange Rubber Duck in Silver Pot",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo8_auto_duck_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo8",
+  "pinch_frac": 0.60,
+  "hold_ctrl": 0.78,
+  "table_center_xy": [0.55, 0.0],
+  "table_half_xy": [0.55, 0.65],
+  "table_rgba": [0.78, 0.58, 0.30, 1.0],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "rubber_duck",
+      "prompts": ["orange rubber duck", "rubber duck", "orange toy"],
+      "min_area": 80, "max_frac": 0.08,
+      "generate_hy3d": true,
+      "collision_shape": "box",
+      "size_xyz": [0.058, 0.048, 0.062],
+      "grasp_height_m": 0.030,
+      "mass_kg": 0.045,
+      "friction": [2.2, 0.03, 0.003],
+      "default_rgb": [0.95, 0.42, 0.08]
+    },
+    {
+      "name": "silver_pot",
+      "prompts": ["silver pot", "metal pot", "pot"],
+      "min_area": 250, "max_frac": 0.15,
+      "generate_hy3d": true,
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [0.130, 0.130, 0.078],
+      "wall_m": 0.005,
+      "mass_kg": 0.55,
+      "default_rgb": [0.68, 0.70, 0.72]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.080,
+    "z_range": [-0.015, 0.10]
+  }
+}

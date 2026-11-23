@@ -1,0 +1,27 @@
+# Python & envs
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+
+# Logs & temp
+MUJOCO_LOG.TXT
+*.log
+
+# Large datasets, raw bundles, generated meshes, masks & videos
+data/
+outputs/
+*.mp4
+*.glb
+*.ply
+*.stl
+*.npz
+*.h5
+*.hdf5
+*.tar.gz
+*.zip
+
+# Legacy exploratory scripts kept locally only
+scripts/_legacy/
