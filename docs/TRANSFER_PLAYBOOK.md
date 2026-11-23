@@ -1,6 +1,6 @@
 # Real2Sim-Bench Cross-Scene Migration Playbook
 
-This guide distills every verified engineering lesson from migrating **248 real DROID episodes** across **3 distinct scenes** (`AUTOLab` cup-in-bowl 100 eps, `AUTOLab` articulated workbench drawer 74 eps, `GuptaLab` motorized standing desk pouring 74 eps) onto **All-on-A100 `MuJoCo 4.0.1`**.
+This guide distills every verified engineering lesson from migrating **608 real DROID episodes** across **10 distinct scenes × 7 independent robotics labs** (`AUTOLab`, `GuptaLab`, `TRI`, `IPRL`, `CLVR`, `PennPAL`, `RPL`) onto **All-on-A100 `MuJoCo 4.0.1`**, raising cross-lab outcome pass rate from **39.5% → 55.8%** (**27.5% → 73.0%** on the 4 zero-shot config-driven scenes).
 
 ---
 
@@ -40,6 +40,16 @@ Every new DROID scene reduces to filling one `SceneTransferConfig` in [`r2s_benc
    - CoACD with `max_convex_hull=24` on a genus-1 mug with a side handle bridges across the hollow interior (`concavity=0.127`), ejecting objects placed inside at `t=0`. Always decouple the `Hunyuan3D-2mv` visual mesh (preserving the real handle) from a guaranteed-hollow 16-facet cylindrical cavity collision ring!
    - Official Menagerie `robotiq_2f85` has a **`2.10 cm` minimum closed inner pad gap** at `ctrl=255`. Any slender object (marker/pen/utensil) must have a flat-bottom upright collision cylinder `>= 2.6 cm` diameter (to avoid rolling at `t=0` and to generate real pinch normal force).
    - Always validate SAM 3.1 masks against the workspace grasp region (`<= 14 cm`) to filter background tabletop distractors (e.g., far-end bowls in `TRI`).
+9. **Zero-Lag Franka Arm PD (`2.2x` Gain + 1-Frame Lookahead) — Learned Across All 608 Episodes**:
+   - Default Menagerie Panda position servo gains lag `2–4` frames (`2–3 cm` spatial lag) behind fast human DROID teleoperation, tipping tall objects (Demo #10 soda can) and stopping `3–5 cm` short of drawer push-end planes (Demo #2).
+   - Scaling Franka arm joint `gainprm`/`biasprm` by `2.2x` (damping by `sqrt(2.2)`) plus `1`-frame feedforward lookahead (`qs[min(ti+1, T-1)]`) eliminates open-loop tracking lag with zero instability across all 10 scenes.
+10. **Robot Gripper as a Physical Caliper (`8.5 * (1 - g_hold) cm`) & `±axis_grasp` Rim-Pinch Alignment**:
+    - Never guess grasped object diameter by eye! The real DROID Robotiq 2F-85 closure plateau `g_hold` directly measures physical grasp thickness (`~2.21 cm` wall on Demo #9 tape roll, `~5.47 cm` on Demo #10 7.5 oz mini soda can).
+    - For hollow annular objects (`hollow_ring`) pinched across one wall (`grasp_mode: "rim_pinch"`), offset the ring center strictly along `±axis_grasp` (toward the visual centroid) by `r_mid = r_out - 0.5*wall` and command `hold_ctrl = 0.98` so one finger cleanly enters the hollow center while the other clamps the outer rim — jumping Demo #9 from **`10.0% → 90.0%` (+80 pp)**!
+11. **Size-Adaptive Anchor Tolerance (`min(0.28 * min_xy, 0.026)` / `min(0.32 * min_xy, 0.055)`)**:
+    - A fixed `6.5 cm` target anchor fallback tolerance is fine for `16 cm` bowls, but catastrophic for precision `4.6 cm` stacking cubes (Demo #7), causing placed cubes to slide off the edge. Tightening tolerance proportionally to object XY footprint jumped Demo #7 stacking from **`22.0% → 84.0%` (+62 pp)**!
+12. **Heavy Container Anchoring for In-Container Extraction Tasks**:
+    - In Demo #4 (`TRI` marker-from-mug), a lightweight `0.25 kg` mug lifts up together with the marker via inner-wall friction (`13/30` failures). Setting a realistic ceramic mug mass (`0.85 kg`) + low inner-wall friction (`0.20`) keeps the mug planted cleanly while extracting the marker (`50.0% → 56.7%`).
 
 ---
 

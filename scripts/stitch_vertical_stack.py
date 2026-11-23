@@ -83,10 +83,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True, help="Output H.264 MP4 path")
     ap.add_argument("--snap", default="", help="Optional snapshot PNG path")
+    ap.add_argument("--title", default="REAL2SIM-BENCH (MuJoCo 4.0.1, All-on-A100)", help="Top banner title")
     ap.add_argument("--item", action="append", required=True, help="LABEL::/path/to/video.mp4")
     args = ap.parse_args()
     pairs = []
     for raw in args.item:
         lbl, vp = raw.split("::", 1)
         pairs.append((lbl, Path(vp)))
-    stitch_vertical(pairs, Path(args.out), snap_png=Path(args.snap) if args.snap else None)
+    stitch_vertical(pairs, Path(args.out), title=args.title, snap_png=Path(args.snap) if args.snap else None)

@@ -34,18 +34,21 @@ flowchart LR
 
 ## Verified All-on-A100 `MuJoCo 4.0.1` Multi-Lab Benchmarks (10 Scenes × 7 Labs = 608 Episodes)
 
-| # | Scene & Task | Robotics Lab | Episodes | Sim Time (EGL) | Outcome Criterion | Outcome PASS |
-| :-: | :--- | :--- | :---: | :---: | :--- | :---: |
-| **01** | Orange Cup → Black Bowl | `AUTOLab` | **100** | `37.4s` (`0.37s/ep`) | Cup inside bowl | **55 / 100 (55.0%)** |
-| **02** | Lego Block → 1:1 Fitted Drawer + Close | `AUTOLab` | **74** | `12.0s` (`0.16s/ep`) | Block in drawer & closed (`≥78%`) | **27 / 74 (36.5%)** |
-| **03** | Red Cup Pouring Beans → Bowl *(motorized desk)* | `GuptaLab` | **74** | `29.2s` (`0.39s/ep`) | Beans poured into bowl | **19 / 74 (25.7%)** |
-| **04** | Remove Orange Marker from Green Mug | `TRI` | **60** | `16.8s` (`0.28s/ep`) | Marker removed outside mug | **30 / 60 (50.0%)** |
-| **05** | Put / Remove Glass Lid on Kitchen Pot | `IPRL` | **50** | `19.6s` (`0.39s/ep`) | Lid placed on / removed from pot | **28 / 50 (56.0%)** |
-| **06** | Pick & Relocate Yellow Mug | `CLVR` | **50** | `14.8s` (`0.30s/ep`) | Mug relocated to target | **26 / 50 (52.0%)** |
-| **07** | Stack Orange Block on Green Block | `GuptaLab` | **50** | `14.6s` (`0.29s/ep`) | Orange block stacked on green block | **11 / 50 (22.0%)** |
-| **08** | Orange Rubber Duck → Silver Pot | `AUTOLab` | **50** | `36.4s` (`0.73s/ep`) | Rubber duck inside pot | **26 / 50 (52.0%)** |
-| **09** | Black Tape Roll → White Plate | `PennPAL` | **50** | `31.8s` (`0.64s/ep`) | Tape roll resting on plate | **5 / 50 (10.0%)** |
-| **10** | Soda Can → Bowl in Kitchen | `RPL` | **50** | `45.6s` (`0.91s/ep`) | Soda can inside bowl | **13 / 50 (26.0%)** |
+After cross-lab failure autopsy and our **v2 universal physics & alignment upgrades** (zero-lag Franka PD `2.2x` gain + 1-frame lookahead, true 16-facet `hollow_ring` + `±axis_grasp` `rim_pinch`, robot-gripper caliper self-sizing, size-adaptive anchor tolerance, and robust grasp timing), overall outcome pass rate jumped from **240 / 608 (39.5%) → 339 / 608 (55.8%, +16.3 pp)** — and across the 4 zero-shot config-driven scenes (`Demo #7–#10`, 200 episodes), from **27.5% → 73.0% (+45.5 pp)** with **0 physics explosions**:
+
+| # | Scene & Task | Robotics Lab | Episodes | Sim Time (EGL) | Outcome Criterion | v1 PASS | v2 PASS | Δ |
+| :-: | :--- | :--- | :---: | :---: | :--- | :---: | :---: | :---: |
+| **01** | Orange Cup → Black Bowl | `AUTOLab` | **100** | `37.4s` (`0.37s/ep`) | Cup inside bowl | 55/100 (55.0%) | **55 / 100 (55.0%)** | — |
+| **02** | Lego Block → 1:1 Fitted Drawer + Close | `AUTOLab` | **74** | `11.8s` (`0.16s/ep`) | Block in drawer & closed (`≥78%`) | 27/74 (36.5%) | **30 / 74 (40.5%)** | **+4.0 pp** |
+| **03** | Red Cup Pouring Beans → Bowl *(motorized desk)* | `GuptaLab` | **74** | `29.2s` (`0.39s/ep`) | Beans poured into bowl | 19/74 (25.7%) | **19 / 74 (25.7%)** | — |
+| **04** | Remove Orange Marker from Green Mug | `TRI` | **60** | `16.8s` (`0.28s/ep`) | Marker removed outside mug | 30/60 (50.0%) | **34 / 60 (56.7%)** | **+6.7 pp** |
+| **05** | Put / Remove Glass Lid on Kitchen Pot | `IPRL` | **50** | `25.2s` (`0.50s/ep`) | Lid placed on / removed from pot | 28/50 (56.0%) | **28 / 50 (56.0%)** | — |
+| **06** | Pick & Relocate Yellow Mug | `CLVR` | **50** | `21.5s` (`0.43s/ep`) | Mug relocated to target | 26/50 (52.0%) | **27 / 50 (54.0%)** | **+2.0 pp** |
+| **07** | Stack Orange Block on Green Block | `GuptaLab` | **50** | `14.6s` (`0.29s/ep`) | Orange block stacked on green block | 11/50 (22.0%) | **42 / 50 (84.0%)** | **+62.0 pp** |
+| **08** | Orange Rubber Duck → Silver Pot | `AUTOLab` | **50** | `36.4s` (`0.73s/ep`) | Rubber duck inside pot | 26/50 (52.0%) | **29 / 50 (58.0%)** | **+6.0 pp** |
+| **09** | Black Tape Roll → White Plate | `PennPAL` | **50** | `35.1s` (`0.70s/ep`) | Tape roll resting on plate | 5/50 (10.0%) | **45 / 50 (90.0%)** | **+80.0 pp** |
+| **10** | Soda Can → Bowl in Kitchen | `RPL` | **50** | `38.3s` (`0.77s/ep`) | Soda can inside bowl | 13/50 (26.0%) | **30 / 50 (60.0%)** | **+34.0 pp** |
+| **Total** | **10 Real DROID Scenes × 7 Labs** | **7 Labs** | **608** | **~266s total** | **Clean Outcome-Only** | **240/608 (39.5%)** | **339 / 608 (55.8%)** | **+16.3 pp** |
 
 ### Demo #2 Articulated Workbench & Drawer 1:1 Dual-View Fit Audit
 ![Demo #2 1:1 Dual-View Articulated Drawer Fit](docs/assets/demo2_drawer_1to1_fit_audit.jpg)

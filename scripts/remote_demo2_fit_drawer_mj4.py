@@ -275,9 +275,10 @@ def build_fitted_workbench_scene(
             name="blue_block_geom", type=mujoco.mjtGeom.mjGEOM_BOX,
             size=[0.017, 0.024, 0.016],
             rgba=[0.16, 0.72, 0.96, 1.0],
-            mass=0.032,
-            friction=[2.0, 0.02, 0.002],
-            solref=[0.025, 1.5],
+            mass=0.038,
+            friction=[1.8, 0.02, 0.002],
+            solref=[0.035, 1.5],
+            solimp=[0.85, 0.95, 0.002, 0.5, 2.0],
         )
         for sx in (-0.007, 0.007):
             for sy in (-0.014, 0.0, 0.014):
@@ -289,6 +290,11 @@ def build_fitted_workbench_scene(
 
     model = spec.compile()
     if with_robot:
+        # v2 zero-lag Franka PD: 2.2x actuator gain cuts open-loop tracking lag during block grasp & drawer push
+        for ai in range(min(7, model.nu)):
+            model.actuator_gainprm[ai, 0] *= 2.2
+            model.actuator_biasprm[ai, 1] *= 2.2
+            model.actuator_biasprm[ai, 2] *= 1.65
         for g in range(model.ngeom):
             nm = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_GEOM, g) or ""
             if "blue_block" in nm or "pad" in nm:
@@ -556,14 +562,16 @@ def eval_demo2_fitted_ep(args: tuple) -> dict:
 
     mon = RolloutMonitor(m, target_body_name="blue_block")
     mon.reset(d)
-    for ti in range(len(qs)):
-        d.ctrl[:7] = qs[ti]
+    T = len(qs)
+    for ti in range(T):
+        # 1-frame lookahead matches real robot position smoothly during fast grasp & drawer push
+        d.ctrl[:7] = qs[min(ti + 1, T - 1)]
         d.ctrl[ag] = (0.64 if (ev["t_close"] <= ti < ev["t_open"]) else float(np.clip(gs[ti], 0.0, 1.0))) * 255.0
         for s in range(33):
             mujoco.mj_step(m, d)
             if (s & 3) == 0:
                 mon.observe(d)
-        if ren is not None and (ti % 4 == 0 or ti == len(qs) - 1):
+        if ren is not None and (ti % 4 == 0 or ti == T - 1):
             ren.update_scene(d, camera=0)
             cv2.imwrite(str(od / f"f_{ti:04d}.jpg"), cv2.cvtColor(ren.render(), cv2.COLOR_RGB2BGR), [int(cv2.IMWRITE_JPEG_QUALITY), 90])
             ts_saved.append(ti)

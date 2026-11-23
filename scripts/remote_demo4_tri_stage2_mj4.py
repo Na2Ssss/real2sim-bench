@@ -182,13 +182,13 @@ def build_tri_marker_mug_scene(
         rgba=[mug_rgb[0], mug_rgb[1], mug_rgb[2], 1.0], contype=0, conaffinity=0, mass=0.0,
     )
     # Exact hollow interior cavity (prevents CoACD genus-1 handle bridging from plugging the mug!)
-    # Heavy ceramic base (0.45kg) + low-friction inner wall so slender marker slides straight out smoothly
+    # Heavy ceramic base (0.85kg) + low-friction inner wall so gripper NEVER lifts mug together with marker!
     mug.add_geom(
         name="tri_mug_bot", type=mujoco.mjtGeom.mjGEOM_CYLINDER,
         pos=[0.0, 0.0, 0.004], size=[0.044, 0.004, 0.0],
-        rgba=[0, 0, 0, 0], mass=0.42, friction=[1.2, 0.01, 0.001], solref=[0.022, 1.4],
+        rgba=[0, 0, 0, 0], mass=0.85, friction=[1.4, 0.02, 0.002], solref=[0.022, 1.4],
     )
-    r_mid, t_wall, h_mug = 0.043, 0.003, 0.084
+    r_mid, t_wall, h_mug = 0.043, 0.003, 0.082
     n_seg = 16
     seg_w = 2.0 * math.pi * r_mid / n_seg * 0.55
     for k in range(n_seg):
@@ -198,7 +198,7 @@ def build_tri_marker_mug_scene(
             pos=[r_mid * math.cos(a), r_mid * math.sin(a), 0.5 * h_mug],
             quat=[math.cos(a / 2.0), 0.0, 0.0, math.sin(a / 2.0)],
             size=[t_wall, seg_w, 0.5 * h_mug],
-            rgba=[0, 0, 0, 0], mass=0.12 / n_seg, friction=[0.4, 0.005, 0.001], solref=[0.022, 1.4],
+            rgba=[0, 0, 0, 0], mass=0.12 / n_seg, friction=[0.20, 0.002, 0.0005], solref=[0.022, 1.4],
         )
 
     # 3) White/Orange Dry-Erase Marker sitting upright inside the hollow mug
@@ -224,6 +224,11 @@ def build_tri_marker_mug_scene(
 
     model = spec.compile()
     if with_robot:
+        # Boost Franka arm servo stiffness (2.2x) for zero-lag tracking!
+        for aid in range(min(7, model.nu)):
+            model.actuator_gainprm[aid, 0] *= 2.2
+            model.actuator_biasprm[aid, 1] *= 2.2
+            model.actuator_biasprm[aid, 2] *= math.sqrt(2.2)
         for g in range(model.ngeom):
             nm = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_GEOM, g) or ""
             if "marker" in nm or "pad" in nm:
@@ -467,9 +472,9 @@ def eval_demo4_ep(args: tuple) -> dict:
     mon = RolloutMonitor(m, target_body_name="marker")
     mon.reset(d)
     for ti in range(len(qs)):
-        d.ctrl[:7] = qs[ti]
-        # Firm full pinch (1.0*255) on slender marker during grasp hold [t_close-2, t_open)
-        d.ctrl[ag] = (1.0 if (max(0, ev["t_close"] - 2) <= ti < ev["t_open"]) else float(np.clip(gs[ti], 0.0, 1.0))) * 255.0
+        d.ctrl[:7] = qs[min(ti + 1, len(qs) - 1)]
+        # Firm full pinch (1.0*255) on slender marker during grasp hold [t_close-1, t_open)
+        d.ctrl[ag] = (1.0 if (max(0, ev["t_close"] - 1) <= ti < ev["t_open"]) else float(np.clip(gs[ti], 0.0, 1.0))) * 255.0
         for s in range(33):
             mujoco.mj_step(m, d)
             if (s & 3) == 0:

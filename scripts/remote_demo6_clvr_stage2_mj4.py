@@ -167,6 +167,10 @@ def build_clvr_scene(
 
     model = spec.compile()
     if with_robot:
+        for _aid in range(min(7, model.nu)):
+            model.actuator_gainprm[_aid, 0] *= 2.2
+            model.actuator_biasprm[_aid, 1] *= 2.2
+            model.actuator_biasprm[_aid, 2] *= 1.4832
         for g in range(model.ngeom):
             nm = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_GEOM, g) or ""
             if "mug_w" in nm or "pad" in nm:
@@ -275,7 +279,7 @@ def eval_ep(args: tuple) -> dict:
 
     mon = RolloutMonitor(m, target_body_name="clvr_mug"); mon.reset(d)
     for ti in range(len(qs)):
-        d.ctrl[:7] = qs[ti]
+        d.ctrl[:7] = qs[min(ti + 1, len(qs) - 1)]
         d.ctrl[ag] = (0.72 if (max(0, ev["t_close"] - 2) <= ti < ev["t_open"]) else float(np.clip(gs[ti], 0, 1))) * 255.0
         for s in range(33):
             mujoco.mj_step(m, d)
