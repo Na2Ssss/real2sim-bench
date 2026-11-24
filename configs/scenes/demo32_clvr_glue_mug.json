@@ -1,0 +1,94 @@
+{
+  "scene_id": "demo32_clvr_glue_mug",
+  "title": "DEMO #32 CLVR | Put Glue Stick in Yellow Mug",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo32_clvr_glue_mug_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo32_clvr_glue_mug",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.76,
+    0.72,
+    0.66,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "glue_stick",
+      "prompts": [
+        "glue stick",
+        "glue",
+        "tube",
+        "marker"
+      ],
+      "min_area": 60,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.03,
+        0.092,
+        0.028
+      ],
+      "grasp_height_m": 0.015,
+      "mass_kg": 0.035,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.24,
+        0.68,
+        0.34
+      ]
+    },
+    {
+      "name": "yellow_mug",
+      "prompts": [
+        "yellow mug",
+        "mug",
+        "cup"
+      ],
+      "min_area": 180,
+      "max_frac": 0.18,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.92,
+        0.78,
+        0.18,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.098,
+        0.098,
+        0.096
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.92,
+        0.78,
+        0.18
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.082,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

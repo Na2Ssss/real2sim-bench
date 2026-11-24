@@ -1,0 +1,102 @@
+{
+  "scene_id": "demo35_auto_cup_bowl2",
+  "title": "DEMO #35 AUTOLab | Put Orange Cup in Black Bowl (Wave 6)",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo35_auto_cup_bowl2_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo35_auto_cup_bowl2",
+  "pinch_frac": 0.45,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.78,
+    0.72,
+    0.62,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "orange_cup",
+      "prompts": [
+        "orange cup",
+        "cup",
+        "mug"
+      ],
+      "min_area": 120,
+      "max_frac": 0.14,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.92,
+        0.44,
+        0.12,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "grasp_mode": "rim_pinch",
+      "size_xyz": [
+        0.080,
+        0.080,
+        0.086
+      ],
+      "wall_m": 0.022,
+      "grasp_height_m": 0.064,
+      "mass_kg": 0.055,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.92,
+        0.44,
+        0.12
+      ]
+    },
+    {
+      "name": "black_bowl",
+      "prompts": [
+        "black bowl",
+        "bowl",
+        "dark bowl"
+      ],
+      "min_area": 240,
+      "max_frac": 0.24,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.16,
+        0.16,
+        0.18,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.155,
+        0.155,
+        0.072
+      ],
+      "wall_m": 0.005,
+      "mass_kg": 0.6,
+      "default_rgb": [
+        0.16,
+        0.16,
+        0.18
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.095,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

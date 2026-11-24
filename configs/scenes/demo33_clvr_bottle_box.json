@@ -1,0 +1,96 @@
+{
+  "scene_id": "demo33_clvr_bottle_box",
+  "title": "DEMO #33 CLVR | Put Small Bottle in Clear Container",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo33_clvr_bottle_box_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo33_clvr_bottle_box",
+  "pinch_frac": 0.65,
+  "hold_ctrl": 0.96,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.76,
+    0.72,
+    0.66,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "bottle",
+      "prompts": [
+        "bottle",
+        "small bottle",
+        "spice bottle",
+        "jar"
+      ],
+      "min_area": 90,
+      "max_frac": 0.1,
+      "generate_hy3d": true,
+      "collision_shape": "cylinder",
+      "size_xyz": [
+        0.044,
+        0.044,
+        0.095
+      ],
+      "grasp_height_m": 0.048,
+      "mass_kg": 0.06,
+      "friction": [
+        2.6,
+        0.04,
+        0.005
+      ],
+      "default_rgb": [
+        0.35,
+        0.62,
+        0.85
+      ]
+    },
+    {
+      "name": "container",
+      "prompts": [
+        "clear container",
+        "plastic container",
+        "box",
+        "bin",
+        "basket"
+      ],
+      "min_area": 300,
+      "max_frac": 0.28,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.78,
+        0.86,
+        0.92,
+        0.78
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.165,
+        0.165,
+        0.085
+      ],
+      "wall_m": 0.005,
+      "mass_kg": 0.6,
+      "default_rgb": [
+        0.78,
+        0.86,
+        0.92
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.115,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

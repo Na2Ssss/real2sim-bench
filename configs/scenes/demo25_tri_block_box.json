@@ -1,0 +1,95 @@
+{
+  "scene_id": "demo25_tri_block_box",
+  "title": "DEMO #25 TRI | Put Block in Box",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo25_tri_block_box_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo25_tri_block_box",
+  "pinch_frac": 0.56,
+  "hold_ctrl": 0.88,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "red_block",
+      "prompts": [
+        "red block",
+        "block",
+        "cube"
+      ],
+      "min_area": 70,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.04,
+        0.04,
+        0.04
+      ],
+      "grasp_height_m": 0.02,
+      "anchor_max_dev_m": 0.01,
+      "mass_kg": 0.045,
+      "friction": [
+        2.4,
+        0.04,
+        0.004
+      ],
+      "default_rgb": [
+        0.82,
+        0.18,
+        0.16
+      ]
+    },
+    {
+      "name": "target_box",
+      "prompts": [
+        "box",
+        "cardboard box",
+        "bowl",
+        "container"
+      ],
+      "min_area": 250,
+      "max_frac": 0.22,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.72,
+        0.58,
+        0.42,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.155,
+        0.155,
+        0.068
+      ],
+      "wall_m": 0.005,
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.72,
+        0.58,
+        0.42
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.095,
+    "z_range": [
+      -0.015,
+      0.12
+    ]
+  }
+}

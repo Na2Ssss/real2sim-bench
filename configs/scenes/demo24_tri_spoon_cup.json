@@ -1,0 +1,94 @@
+{
+  "scene_id": "demo24_tri_spoon_cup",
+  "title": "DEMO #24 TRI | Put Spoon in Cup",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo24_tri_spoon_cup_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo24_tri_spoon_cup",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "spoon",
+      "prompts": [
+        "spoon",
+        "silver spoon",
+        "utensil"
+      ],
+      "min_area": 50,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.028,
+        0.118,
+        0.022
+      ],
+      "grasp_height_m": 0.012,
+      "mass_kg": 0.028,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.76,
+        0.78,
+        0.82
+      ]
+    },
+    {
+      "name": "target_cup",
+      "prompts": [
+        "cup",
+        "mug",
+        "white cup",
+        "paper cup"
+      ],
+      "min_area": 180,
+      "max_frac": 0.16,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.86,
+        0.86,
+        0.84,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.098,
+        0.098,
+        0.094
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.48,
+      "default_rgb": [
+        0.86,
+        0.86,
+        0.84
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.08,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

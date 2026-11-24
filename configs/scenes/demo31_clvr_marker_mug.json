@@ -1,0 +1,95 @@
+{
+  "scene_id": "demo31_clvr_marker_mug",
+  "title": "DEMO #31 CLVR | Put Marker in Mug",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo31_clvr_marker_mug_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo31_clvr_marker_mug",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.76,
+    0.72,
+    0.66,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "marker",
+      "prompts": [
+        "marker",
+        "yellow marker",
+        "black marker",
+        "pen"
+      ],
+      "min_area": 60,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.028,
+        0.106,
+        0.024
+      ],
+      "grasp_height_m": 0.013,
+      "mass_kg": 0.025,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.82,
+        0.24,
+        0.2
+      ]
+    },
+    {
+      "name": "mug",
+      "prompts": [
+        "mug",
+        "yellow mug",
+        "cup",
+        "coffee mug"
+      ],
+      "min_area": 180,
+      "max_frac": 0.18,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.88,
+        0.74,
+        0.22,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.098,
+        0.098,
+        0.096
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.88,
+        0.74,
+        0.22
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.082,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

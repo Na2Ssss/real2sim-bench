@@ -1,6 +1,6 @@
 # Real2Sim-Bench: Config-Driven Multi-View Real-to-Sim Pipeline & Unified `Uni-Goal-Bridge` Action Render
 
-A clean, end-to-end **Real-to-Sim** asset reconstruction, **outcome-based physical benchmark**, and **Zero-Waypoint Flow-Matching Action Render (`Uni-Goal-Bridge DiT`)** codebase validated across **22 real DROID manipulation scenes × ALL 12 / 12 (100%) calibrated DROID robotics labs (`1,162` real teleoperation episodes)** on **All-on-A100 `MuJoCo 4.0.1` + `SAM 3.1` + Multi-View `Hunyuan3D-2mv` + `CoACD`**.
+A clean, end-to-end **Real-to-Sim** asset reconstruction, **outcome-based physical benchmark**, and **Zero-Waypoint Flow-Matching Action Render (`Uni-Goal-Bridge DiT`)** codebase validated across **40 real DROID manipulation scenes × ALL 12 / 12 (100%) calibrated DROID robotics labs (`1,765` real teleoperation episodes, `1,081 / 1,765 = 61.2%` PASS)** on **All-on-A100 `MuJoCo 4.0.1` + `SAM 3.1` + Multi-View `Hunyuan3D-2mv` + `CoACD`**.
 
 ![Real2Sim-Bench: Multi-Lab DROID Real-to-Sim Benchmark](docs/assets/teaser_10scenes_7labs.jpg)
 
@@ -30,9 +30,9 @@ flowchart LR
 
 ---
 
-## Verified All-on-A100 `MuJoCo 4.0.1` Multi-Lab Benchmarks (22 Scenes × 12/12 Calibrated DROID Labs = 1,162 Episodes)
+## Verified All-on-A100 `MuJoCo 4.0.1` Multi-Lab Benchmarks (40 Scenes × 12/12 Calibrated DROID Labs = 1,765 Episodes)
 
-Across all **12 calibrated DROID robotics labs** (`AUTOLab`, `CLVR`, `GuptaLab`, `ILIAD`, `IPRL`, `IRIS`, `PennPAL`, `RAIL`, `REAL`, `RPL`, `TRI`, `WEIRD`), Real2Sim-Bench achieves **`708 / 1,162 (60.9%)`** clean outcome-only pass rate (and **`515 / 754 (68.3%)`** across the 16 config-driven scenes `Demo #7–#22`):
+Across all **12 calibrated DROID robotics labs** (`AUTOLab`, `CLVR`, `GuptaLab`, `ILIAD`, `IPRL`, `IRIS`, `PennPAL`, `RAIL`, `REAL`, `RPL`, `TRI`, `WEIRD`), Real2Sim-Bench achieves **`1,081 / 1,765 (61.2%)`** clean outcome-only pass rate across **40 real scenes** (`888 / 1,357 = 65.4%` across the 34 config-driven universal scenes `Demo #7–#40`):
 
 | # | Scene & Task | Robotics Lab | Episodes | Outcome Criterion | Verified PASS |
 | :-: | :--- | :--- | :---: | :--- | :---: |
@@ -58,7 +58,25 @@ Across all **12 calibrated DROID robotics labs** (`AUTOLab`, `CLVR`, `GuptaLab`,
 | **20** | Yellow Block → Blue Cup | `AUTOLab` | 71 | Block inside cup | **50 / 71 (70.4%)** |
 | **21** | Marker → Paper Cup | `TRI` | 23 | Marker inside cup | **13 / 23 (56.5%)** |
 | **22** | Plush Toy → Plate | `PennPAL` | 27 | Toy resting on plate | **17 / 27 (63.0%)** |
-| **Total** | **22 Real DROID Scenes × 12/12 Calibrated Labs** | **12 Labs** | **1,162** | **Clean Outcome-Only** | **708 / 1,162 (60.9%)** |
+| **23** | Marker → Red Mug | `IRIS` | 60 | Marker inside mug | **34 / 60 (56.7%)** |
+| **24** | Spoon → Cup *(new object)* | `TRI` | 47 | Spoon inside cup | **26 / 47 (55.3%)** |
+| **25** | Red Block → Box *(new container)* | `TRI` | 28 | Block inside box | **21 / 28 (75.0%)** |
+| **26** | Pen → Glass Cup | `IRIS` | 55 | Pen inside cup | **37 / 55 (67.3%)** |
+| **27** | Block → Black Bowl (B2) | `AUTOLab` | 51 | Block inside bowl | **37 / 51 (72.5%)** |
+| **28** | Stack 4.6 cm Blocks (B2) | `GuptaLab` | 32 | Block stacked on block | **23 / 32 (71.9%)** |
+| **29** | Pen → White Bowl | `IRIS` | 25 | Pen inside bowl | **18 / 25 (72.0%)** |
+| **30** | Marker → Cup | `CLVR` | 37 | Marker inside cup | **20 / 37 (54.1%)** |
+| **31** | Marker → Yellow Mug | `CLVR` | 54 | Marker inside mug | **31 / 54 (57.4%)** |
+| **32** | Glue Stick → Yellow Mug *(new object)* | `CLVR` | 15 | Glue stick inside mug | **12 / 15 (80.0%)** |
+| **33** | Small Bottle → Clear Container | `CLVR` | 29 | Bottle inside container | **15 / 29 (51.7%)** |
+| **34** | Orange Rubber Duck → Toy Silver Pot | `AUTOLab` | 24 | Duck inside pot | **23 / 24 (95.8% ★)** |
+| **35** | Orange Cup → Black Bowl (B2) | `AUTOLab` | 60 | Cup inside bowl | **22 / 60 (36.7%)** |
+| **36** | Silver Spoon → Bowl | `TRI` | 17 | Spoon inside bowl | **4 / 17 (23.5%)** |
+| **37** | Pen → Cup | `CLVR` | 13 | Pen inside cup | **5 / 13 (38.5%)** |
+| **38** | Plush Toy → Pink Pot | `RAIL` | 14 | Plush inside pot | **8 / 14 (57.1%)** |
+| **39** | Black Tape Roll → White Plate (B2) | `PennPAL` | 12 | Tape resting on plate | **11 / 12 (91.7% ★)** |
+| **40** | Marker → White Bowl (B2) | `IRIS` | 30 | Marker inside bowl | **26 / 30 (86.7% ★)** |
+| **Total** | **40 Real DROID Scenes × 12/12 Calibrated Labs** | **12 Labs** | **1,765** | **Clean Outcome-Only** | **1,081 / 1,765 (61.2%)** |
 
 ---
 
@@ -76,6 +94,7 @@ Single unified Action Render trained across up to **17 tasks × 11 robotics labs
 | `v6-Real` (17T × 11L, Uniform 1/17) | 27.8M | 17T / 47D | 86/125 (68.8%) | 69/150 (46.0%) | 70/150 (46.7%) | 59/150 (39.3%) | 215/425 (50.6%) |
 | `v7-Anneal` (17T, Temp-Balanced Sim→Real Anneal) | 27.8M | 17T / 47D | 83/125 (66.4%) | 64/150 (42.7%) | 79/150 (52.7%) | 55/150 (36.7%) | 217/425 (51.1%) |
 | **`v8-8DGeom` (17T × 11L, +`is_tgt_container` bit, Anneal)** | **27.8M** | **17T / 48D** | **94/125 (75.2% ★)** | **75/150 (50.0% ★)** | **84/150 (56.0% ★)** | **65/150 (43.3% ★)** | **243/425 (57.2% ★)** |
+| `v9-RealOnly` (23T × 11L, Pure Real `103.7k` chunks, no sim) | 42.3M | 23T / 48D | 82/125 (65.6%) | 72/150 (48.0%) | 69/150 (46.0%) | 64/150 (42.7%) + `wave4` 65/150 (43.3%) | 215/425 (50.6% 17T) / 280/575 (48.7% 23T) |
 
 > **`v8-8DGeom` Per-Task Highlights (17 Tasks × 11 Labs in One Zero-Task-ID Model)**: Demo #1 Cup→Bowl **`96.0%`**, Demo #8 Duck→Pot **`84.0%`**, Demo #9 Hollow Tape `rim_pinch` **`80.0%`**, Demo #11 Green Block **`76.0%`**, Demo #20 Block→Cup **`76.0%`**, Demo #12 Cup-in-Cup **`64.0%`**, Demo #10 Soda Can **`60.0%`**, Demo #13 `IRIS` Marker @ 360° RandYaw **`60.0%`**, Demo #7 4.6cm Stacking **`56.0%`**, Demo #15 `RAIL` Block→Plate **`52.0%`**.
 
@@ -103,7 +122,7 @@ MUJOCO_GL=egl R2S_WORKERS=16 python scripts/remote_universal_stage2_mj4.py \
 ---
 
 ## Documentation & Key Files
-- [`docs/REAL2SIM_PIPELINE_ISSUES.md`](docs/REAL2SIM_PIPELINE_ISSUES.md) — Permanent Real2Sim & Policy Issue Tracker (`R2S-01` ~ `R2S-14`) and pre-flight checklist for onboarding new DROID scenes.
+- [`docs/REAL2SIM_PIPELINE_ISSUES.md`](docs/REAL2SIM_PIPELINE_ISSUES.md) — Permanent Real2Sim & Policy Issue Tracker (`R2S-01` ~ `R2S-16`) and pre-flight checklist for onboarding new DROID scenes.
 - [`docs/TRANSFER_PLAYBOOK.md`](docs/TRANSFER_PLAYBOOK.md) — Cross-lab engineering playbook & pitfall guide.
-- [`configs/scenes/`](configs/scenes/) — All 16 declarative JSON specs (`demo7`–`demo22`) covering 12 robotics labs.
-- [`scripts/remote_uni_goal_bridge_v8.py`](scripts/remote_uni_goal_bridge_v8.py) — 27.8M 17-Task × 11-Lab Zero-Waypoint `Uni-Goal-Bridge DiT` (4-step Bridge ODE, `OBS=48`).
+- [`configs/scenes/`](configs/scenes/) — All 34 declarative JSON specs (`demo7`–`demo40`) covering all 12 calibrated DROID robotics labs.
+- [`scripts/remote_uni_goal_bridge_v8.py`](scripts/remote_uni_goal_bridge_v8.py) / [`v9`](scripts/remote_uni_goal_bridge_v9.py) / [`v10`](scripts/remote_uni_goal_bridge_v10.py) — Zero-Waypoint `Uni-Goal-Bridge DiT` Action Render scaling from `27.8M` (17T) → `42.3M` (23T) → `60.8M` (34T × 11L, `131,111` verified real chunks).

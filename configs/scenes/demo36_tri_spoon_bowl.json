@@ -1,0 +1,95 @@
+{
+  "scene_id": "demo36_tri_spoon_bowl",
+  "title": "DEMO #36 TRI | Put Spoon in Bowl",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo36_tri_spoon_bowl_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo36_tri_spoon_bowl",
+  "pinch_frac": 0.7,
+  "hold_ctrl": 0.99,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.76,
+    0.74,
+    0.7,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "spoon",
+      "prompts": [
+        "spoon",
+        "silver spoon",
+        "metal spoon",
+        "utensil"
+      ],
+      "min_area": 55,
+      "max_frac": 0.09,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.026,
+        0.125,
+        0.02
+      ],
+      "grasp_height_m": 0.011,
+      "mass_kg": 0.025,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.74,
+        0.76,
+        0.79
+      ]
+    },
+    {
+      "name": "bowl",
+      "prompts": [
+        "bowl",
+        "ceramic bowl",
+        "white bowl",
+        "silver bowl"
+      ],
+      "min_area": 220,
+      "max_frac": 0.24,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.88,
+        0.88,
+        0.86,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.148,
+        0.148,
+        0.068
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.55,
+      "default_rgb": [
+        0.88,
+        0.88,
+        0.86
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.095,
+    "z_range": [
+      -0.015,
+      0.13
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "scene_id": "demo28_gupta_stack_more",
+  "title": "DEMO #28 GuptaLab | Stack Block on Block (Batch 2)",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo28_gupta_stack_more_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo28_gupta_stack_more",
+  "pinch_frac": 0.6,
+  "hold_ctrl": 0.74,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "top_block",
+      "prompts": [
+        "orange block",
+        "yellow block",
+        "red block",
+        "block"
+      ],
+      "min_area": 75,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.044,
+        0.044,
+        0.044
+      ],
+      "grasp_height_m": 0.022,
+      "anchor_max_dev_m": 0.01,
+      "mass_kg": 0.055,
+      "friction": [
+        2.2,
+        0.03,
+        0.003
+      ],
+      "default_rgb": [
+        0.9,
+        0.36,
+        0.12
+      ]
+    },
+    {
+      "name": "base_block",
+      "prompts": [
+        "green block",
+        "blue block",
+        "block"
+      ],
+      "min_area": 75,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.046,
+        0.046,
+        0.046
+      ],
+      "mass_kg": 0.14,
+      "friction": [
+        1.5,
+        0.02,
+        0.002
+      ],
+      "default_rgb": [
+        0.14,
+        0.52,
+        0.28
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "on_target",
+    "max_xy_m": 0.065,
+    "z_range": [
+      0.025,
+      0.085
+    ]
+  }
+}

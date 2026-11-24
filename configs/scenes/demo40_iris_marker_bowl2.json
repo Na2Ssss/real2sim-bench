@@ -1,0 +1,94 @@
+{
+  "scene_id": "demo40_iris_marker_bowl2",
+  "title": "DEMO #40 IRIS | Put Marker in Bowl (Wave 6)",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo40_iris_marker_bowl2_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo40_iris_marker_bowl2",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "marker",
+      "prompts": [
+        "marker",
+        "red marker",
+        "blue marker",
+        "pen"
+      ],
+      "min_area": 60,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.028,
+        0.108,
+        0.024
+      ],
+      "grasp_height_m": 0.013,
+      "mass_kg": 0.025,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.82,
+        0.22,
+        0.2
+      ]
+    },
+    {
+      "name": "bowl",
+      "prompts": [
+        "white bowl",
+        "bowl",
+        "ceramic bowl"
+      ],
+      "min_area": 220,
+      "max_frac": 0.22,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.92,
+        0.91,
+        0.88,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.145,
+        0.145,
+        0.068
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.92,
+        0.91,
+        0.88
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.095,
+    "z_range": [
+      -0.015,
+      0.12
+    ]
+  }
+}

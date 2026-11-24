@@ -1,0 +1,96 @@
+{
+  "scene_id": "demo34_auto_duck_pot",
+  "title": "DEMO #34 AUTOLab | Put Orange Rubber Duck in Pot",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo34_auto_duck_pot_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo34_auto_duck_pot",
+  "pinch_frac": 0.65,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.78,
+    0.75,
+    0.7,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "rubber_duck",
+      "prompts": [
+        "orange duck",
+        "rubber duck",
+        "duck",
+        "orange toy"
+      ],
+      "min_area": 80,
+      "max_frac": 0.1,
+      "generate_hy3d": true,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.032,
+        0.048,
+        0.042
+      ],
+      "grasp_height_m": 0.02,
+      "mass_kg": 0.03,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.96,
+        0.48,
+        0.12
+      ]
+    },
+    {
+      "name": "pot",
+      "prompts": [
+        "pot",
+        "metal pot",
+        "silver pot",
+        "pan",
+        "bowl"
+      ],
+      "min_area": 180,
+      "max_frac": 0.2,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.72,
+        0.74,
+        0.77,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.108,
+        0.108,
+        0.068
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.55,
+      "default_rgb": [
+        0.72,
+        0.74,
+        0.77
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.11,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

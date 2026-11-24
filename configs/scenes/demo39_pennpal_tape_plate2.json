@@ -1,0 +1,102 @@
+{
+  "scene_id": "demo39_pennpal_tape_plate2",
+  "title": "DEMO #39 PennPAL | Put Black Tape on White Plate (Wave 6)",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo39_pennpal_tape_plate2_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo39_pennpal_tape_plate2",
+  "pinch_frac": 0.45,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.78,
+    0.76,
+    0.72,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "black_tape",
+      "prompts": [
+        "black tape",
+        "masking tape",
+        "tape",
+        "roll of tape"
+      ],
+      "min_area": 90,
+      "max_frac": 0.12,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.16,
+        0.16,
+        0.18,
+        1.0
+      ],
+      "collision_shape": "hollow_ring",
+      "grasp_mode": "rim_pinch",
+      "size_xyz": [
+        0.094,
+        0.094,
+        0.048
+      ],
+      "wall_m": 0.024,
+      "grasp_height_m": 0.026,
+      "mass_kg": 0.08,
+      "friction": [
+        2.4,
+        0.04,
+        0.004
+      ],
+      "default_rgb": [
+        0.16,
+        0.16,
+        0.18
+      ]
+    },
+    {
+      "name": "white_plate",
+      "prompts": [
+        "white plate",
+        "plate",
+        "dish"
+      ],
+      "min_area": 300,
+      "max_frac": 0.28,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.94,
+        0.94,
+        0.92,
+        1.0
+      ],
+      "collision_shape": "flat_plate",
+      "size_xyz": [
+        0.205,
+        0.205,
+        0.016
+      ],
+      "mass_kg": 0.55,
+      "default_rgb": [
+        0.94,
+        0.94,
+        0.92
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "on_target",
+    "max_xy_m": 0.115,
+    "z_range": [
+      0.005,
+      0.09
+    ]
+  }
+}
