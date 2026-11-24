@@ -1,0 +1,93 @@
+{
+  "scene_id": "demo16_rail_marker_pot",
+  "title": "DEMO #16 RAIL | Put Marker in Pot",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo16_rail_marker_pot_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo16_rail_marker_pot",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "marker",
+      "prompts": [
+        "marker",
+        "pen"
+      ],
+      "min_area": 60,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.027,
+        0.130,
+        0.024
+      ],
+      "grasp_height_m": 0.013,
+      "mass_kg": 0.035,
+      "friction": [
+        2.4,
+        0.04,
+        0.004
+      ],
+      "default_rgb": [
+        0.22,
+        0.22,
+        0.26
+      ]
+    },
+    {
+      "name": "target_pot",
+      "prompts": [
+        "pot",
+        "silver pot",
+        "pan",
+        "black pot"
+      ],
+      "min_area": 300,
+      "max_frac": 0.22,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.74,
+        0.76,
+        0.79,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.165,
+        0.165,
+        0.082
+      ],
+      "wall_m": 0.006,
+      "mass_kg": 0.6,
+      "default_rgb": [
+        0.55,
+        0.56,
+        0.58
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.105,
+    "z_range": [
+      -0.015,
+      0.12
+    ]
+  }
+}

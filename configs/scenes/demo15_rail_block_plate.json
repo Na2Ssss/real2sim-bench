@@ -1,0 +1,86 @@
+{
+  "scene_id": "demo15_rail_block_plate",
+  "title": "DEMO #15 RAIL | Put Block on Plate",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo15_rail_block_plate_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo15_rail_block_plate",
+  "pinch_frac": 0.45,
+  "hold_ctrl": 0.78,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "yellow_block",
+      "prompts": [
+        "yellow block",
+        "block",
+        "cube",
+        "toy"
+      ],
+      "min_area": 80,
+      "max_frac": 0.08,
+      "generate_hy3d": true,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.046,
+        0.046,
+        0.046
+      ],
+      "grasp_height_m": 0.024,
+      "mass_kg": 0.045,
+      "friction": [
+        2.2,
+        0.03,
+        0.003
+      ],
+      "default_rgb": [
+        0.9,
+        0.78,
+        0.16
+      ]
+    },
+    {
+      "name": "orange_plate",
+      "prompts": [
+        "orange plate",
+        "plate",
+        "dish"
+      ],
+      "min_area": 300,
+      "max_frac": 0.22,
+      "generate_hy3d": false,
+      "collision_shape": "flat_plate",
+      "size_xyz": [
+        0.195,
+        0.195,
+        0.016
+      ],
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.88,
+        0.46,
+        0.18
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "on_target",
+    "max_xy_m": 0.11,
+    "z_range": [
+      0.005,
+      0.09
+    ]
+  }
+}

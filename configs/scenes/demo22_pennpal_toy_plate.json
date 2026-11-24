@@ -1,0 +1,88 @@
+{
+  "scene_id": "demo22_pennpal_toy_plate",
+  "title": "DEMO #22 PennPAL | Put Plush Toy on Plate",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo22_pennpal_toy_plate_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo22_pennpal_toy_plate",
+  "pinch_frac": 0.62,
+  "hold_ctrl": 0.94,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "plush_toy",
+      "prompts": [
+        "plush toy",
+        "toy",
+        "banana",
+        "green toy"
+      ],
+      "min_area": 100,
+      "max_frac": 0.12,
+      "generate_hy3d": true,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.029,
+        0.078,
+        0.034
+      ],
+      "grasp_height_m": 0.017,
+      "anchor_max_dev_m": 0.012,
+      "mass_kg": 0.05,
+      "friction": [
+        2.4,
+        0.04,
+        0.004
+      ],
+      "default_rgb": [
+        0.86,
+        0.78,
+        0.22
+      ]
+    },
+    {
+      "name": "target_plate",
+      "prompts": [
+        "plate",
+        "beige plate",
+        "white plate",
+        "bowl"
+      ],
+      "min_area": 300,
+      "max_frac": 0.22,
+      "generate_hy3d": false,
+      "collision_shape": "flat_plate",
+      "size_xyz": [
+        0.2,
+        0.2,
+        0.016
+      ],
+      "mass_kg": 0.55,
+      "default_rgb": [
+        0.88,
+        0.84,
+        0.76
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "on_target",
+    "max_xy_m": 0.115,
+    "z_range": [
+      0.005,
+      0.095
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "scene_id": "demo19_weird_obj_bowl",
+  "title": "DEMO #19 WEIRD | Put Object in Bowl or Cup",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo19_weird_obj_bowl_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo19_weird_obj_bowl",
+  "pinch_frac": 0.62,
+  "hold_ctrl": 0.96,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "small_obj",
+      "prompts": [
+        "ball",
+        "toy",
+        "marker",
+        "fork",
+        "block"
+      ],
+      "min_area": 60,
+      "max_frac": 0.1,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.029,
+        0.056,
+        0.028
+      ],
+      "grasp_height_m": 0.015,
+      "mass_kg": 0.045,
+      "friction": [
+        2.4,
+        0.04,
+        0.004
+      ],
+      "default_rgb": [
+        0.8,
+        0.28,
+        0.22
+      ]
+    },
+    {
+      "name": "target_bowl",
+      "prompts": [
+        "bowl",
+        "cup",
+        "red bowl",
+        "blue cup"
+      ],
+      "min_area": 200,
+      "max_frac": 0.2,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.82,
+        0.24,
+        0.22,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.145,
+        0.145,
+        0.068
+      ],
+      "wall_m": 0.005,
+      "mass_kg": 0.45,
+      "default_rgb": [
+        0.82,
+        0.24,
+        0.22
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.095,
+    "z_range": [
+      -0.015,
+      0.12
+    ]
+  }
+}

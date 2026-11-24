@@ -1,0 +1,94 @@
+{
+  "scene_id": "demo18_real_marker_mug",
+  "title": "DEMO #18 REAL | Put Marker in Mug",
+  "bundle_dir": "/data2/r2s_bench/outputs/demo18_real_marker_mug_bundle",
+  "asset_dir": "/data2/r2s_bench/outputs/hy3d_demo18_real_marker_mug",
+  "pinch_frac": 0.68,
+  "hold_ctrl": 0.98,
+  "table_center_xy": [
+    0.55,
+    0.0
+  ],
+  "table_half_xy": [
+    0.55,
+    0.65
+  ],
+  "table_rgba": [
+    0.8,
+    0.78,
+    0.74,
+    1.0
+  ],
+  "use_homography_table": true,
+  "objects": [
+    {
+      "name": "marker",
+      "prompts": [
+        "marker",
+        "pen",
+        "glue stick"
+      ],
+      "min_area": 60,
+      "max_frac": 0.08,
+      "generate_hy3d": false,
+      "collision_shape": "box",
+      "size_xyz": [
+        0.029,
+        0.102,
+        0.024
+      ],
+      "grasp_height_m": 0.013,
+      "mass_kg": 0.025,
+      "friction": [
+        2.8,
+        0.05,
+        0.005
+      ],
+      "default_rgb": [
+        0.24,
+        0.24,
+        0.26
+      ]
+    },
+    {
+      "name": "target_mug",
+      "prompts": [
+        "mug",
+        "cup",
+        "white mug",
+        "black mug"
+      ],
+      "min_area": 180,
+      "max_frac": 0.16,
+      "generate_hy3d": true,
+      "use_visual_mesh": false,
+      "visual_rgba": [
+        0.85,
+        0.85,
+        0.82,
+        1.0
+      ],
+      "collision_shape": "hollow_cylinder",
+      "size_xyz": [
+        0.1,
+        0.1,
+        0.095
+      ],
+      "wall_m": 0.004,
+      "mass_kg": 0.5,
+      "default_rgb": [
+        0.85,
+        0.85,
+        0.82
+      ]
+    }
+  ],
+  "outcome": {
+    "type": "in_container",
+    "max_xy_m": 0.08,
+    "z_range": [
+      -0.015,
+      0.14
+    ]
+  }
+}

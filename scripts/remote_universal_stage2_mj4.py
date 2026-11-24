@@ -144,7 +144,7 @@ def add_scene_object(spec: mujoco.MjSpec, obj_cfg: dict, xy: Tuple[float, float]
     if obj_cfg.get("freejoint", True):
         body.add_freejoint(name=f"{name}_jnt")
 
-    has_vis = vis_obj is not None and vis_obj.exists()
+    has_vis = vis_obj is not None and vis_obj.exists() and bool(obj_cfg.get("use_visual_mesh", True))
     if has_vis:
         spec.add_mesh(name=f"{name}_vis_mesh", file=str(vis_obj))
         body.add_geom(
@@ -152,15 +152,19 @@ def add_scene_object(spec: mujoco.MjSpec, obj_cfg: dict, xy: Tuple[float, float]
             rgba=[rgb[0], rgb[1], rgb[2], 1.0], contype=0, conaffinity=0, mass=0.0,
         )
 
-    col_alpha = 0.0 if has_vis else 1.0
-    col_rgba = [rgb[0], rgb[1], rgb[2], col_alpha]
+    if has_vis:
+        col_rgba = [rgb[0], rgb[1], rgb[2], 0.0]
+    elif "visual_rgba" in obj_cfg:
+        col_rgba = [float(v) for v in obj_cfg["visual_rgba"]]
+    else:
+        col_rgba = [rgb[0], rgb[1], rgb[2], 1.0]
 
     if shape == "hollow_cylinder":
         r_out = 0.5 * max(sx, sy)
         wall = float(obj_cfg.get("wall_m", 0.004))
         body.add_geom(name=f"{name}_bot", type=mujoco.mjtGeom.mjGEOM_CYLINDER, pos=[0, 0, 0.004], size=[r_out, 0.004, 0], rgba=col_rgba, mass=mass * 0.65, friction=[1.1, 0.01, 0.001])
         r_mid = r_out - 0.5 * wall
-        n_seg = 16
+        n_seg = 24 if not has_vis else 16
         seg_w = 2.0 * math.pi * r_mid / n_seg * 0.56
         for k in range(n_seg):
             a = 2.0 * math.pi * k / n_seg
@@ -170,6 +174,16 @@ def add_scene_object(spec: mujoco.MjSpec, obj_cfg: dict, xy: Tuple[float, float]
                 quat=[math.cos(a / 2.0), 0, 0, math.sin(a / 2.0)],
                 size=[0.5 * wall, seg_w, 0.5 * sz], rgba=col_rgba, mass=(mass * 0.35) / n_seg, friction=fric, solref=[0.022, 1.4],
             )
+    elif shape == "horizontal_capsule":
+        # Rounded horizontal capsule along local Y (narrow graspable diameter 2r along gripper closing axis X!)
+        r = 0.5 * min(sx, sz)
+        half_cyl = max(0.005, 0.5 * sy - r)
+        q_y = [math.cos(-math.pi / 4.0), math.sin(-math.pi / 4.0), 0.0, 0.0]
+        body.add_geom(
+            name=f"{name}_col", type=mujoco.mjtGeom.mjGEOM_CAPSULE,
+            pos=[0.0, 0.0, r], quat=q_y, size=[r, half_cyl, 0.0],
+            rgba=col_rgba, mass=mass, friction=fric, solref=[0.024, 1.5],
+        )
     elif shape in ("ring", "hollow_ring"):
         # True open-top & open-bottom 16-facet hollow ring (lets Robotiq insert 1 finger inside tape hole and pinch wall!)
         r_out = 0.5 * max(sx, sy)
@@ -336,8 +350,18 @@ def eval_ep(args: tuple) -> dict:
             obj_xys[nm] = vis_xy if float(np.linalg.norm(np.array(vis_xy) - anc)) <= max_dev else (float(anc[0]), float(anc[1]))
         obj_ious[nm] = round(iou_v, 3)
 
-    if float(np.linalg.norm(np.array(obj_xys[src_name]) - np.array(obj_xys[tgt_name]))) < 0.06:
-        obj_xys[tgt_name] = (float(po[0]), float(po[1]))
+    # P1 Non-Overlap Radius Guard: prevent t=0 source-container wall interpenetration explosions!
+    r_src = 0.5 * max(float(src_cfg["size_xyz"][0]), float(src_cfg["size_xyz"][1]))
+    r_tgt = 0.5 * max(float(tgt_cfg["size_xyz"][0]), float(tgt_cfg["size_xyz"][1]))
+    min_sep = r_src + r_tgt + 0.012
+    if float(np.linalg.norm(np.array(obj_xys[src_name]) - np.array(obj_xys[tgt_name]))) < min_sep:
+        if float(np.linalg.norm(po[:2] - np.array(obj_xys[src_name]))) >= min_sep:
+            obj_xys[tgt_name] = (float(po[0]), float(po[1]))
+        else:
+            u = po[:2] - pc[:2]
+            un = float(np.linalg.norm(u))
+            u = (u / un) if un > 1e-4 else np.array([0.0, 1.0])
+            obj_xys[tgt_name] = (float(obj_xys[src_name][0] + min_sep * u[0]), float(obj_xys[src_name][1] + min_sep * u[1]))
 
     tbl_tex = None
     if save_vid and cfg.get("use_homography_table", True):
