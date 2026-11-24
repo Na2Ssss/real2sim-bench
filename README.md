@@ -94,7 +94,9 @@ Single unified Action Render trained across up to **17 tasks × 11 robotics labs
 | `v6-Real` (17T × 11L, Uniform 1/17) | 27.8M | 17T / 47D | 86/125 (68.8%) | 69/150 (46.0%) | 70/150 (46.7%) | 59/150 (39.3%) | 215/425 (50.6%) |
 | `v7-Anneal` (17T, Temp-Balanced Sim→Real Anneal) | 27.8M | 17T / 47D | 83/125 (66.4%) | 64/150 (42.7%) | 79/150 (52.7%) | 55/150 (36.7%) | 217/425 (51.1%) |
 | **`v8-8DGeom` (17T × 11L, +`is_tgt_container` bit, Anneal)** | **27.8M** | **17T / 48D** | **94/125 (75.2% ★)** | **75/150 (50.0% ★)** | **84/150 (56.0% ★)** | **65/150 (43.3% ★)** | **243/425 (57.2% ★)** |
-| `v9-RealOnly` (23T × 11L, Pure Real `103.7k` chunks, no sim) | 42.3M | 23T / 48D | 82/125 (65.6%) | 72/150 (48.0%) | 69/150 (46.0%) | 64/150 (42.7%) + `wave4` 65/150 (43.3%) | 215/425 (50.6% 17T) / 280/575 (48.7% 23T) |
+| `v9-RealOnly` (23T × 11L, Pure Real `103.7k` chunks, no sim) | 42.3M | 23T / 48D | 82/125 (65.6%) | 72/150 (48.0%) | 69/150 (46.0%) | 64/150 (42.7%) + `wave4` 65/150 (43.3%) | 280/575 (48.7% 23T) |
+| **`v9-Anneal` (23T × 11L, `v8` All-17 Sim→Real Anneal)** | **42.3M** | **23T / 48D** | 86/125 (68.8%) | **84/150 (56.0% ★)** | **87/150 (58.0% ★)** | 63/150 (42.0%) + `wave4` 66/150 (44.0%) | **302/575 (52.5% ★ 23T)** |
+| **`v10-Grand` (34T × 11L, `131k` Real + `275k` Sim→Real Anneal)** | **61.0M** | **34T / 48D** | 86/125 (68.8%) | 74/150 (49.3%) | 83/150 (55.3%) | 58/150 (38.7%) + `wave4` **71/150 (47.3% ★)** + `wave56` **148/275 (53.8% ★)** | **446/850 (52.5% ★ ALL 34T!)** |
 
 > **`v8-8DGeom` Per-Task Highlights (17 Tasks × 11 Labs in One Zero-Task-ID Model)**: Demo #1 Cup→Bowl **`96.0%`**, Demo #8 Duck→Pot **`84.0%`**, Demo #9 Hollow Tape `rim_pinch` **`80.0%`**, Demo #11 Green Block **`76.0%`**, Demo #20 Block→Cup **`76.0%`**, Demo #12 Cup-in-Cup **`64.0%`**, Demo #10 Soda Can **`60.0%`**, Demo #13 `IRIS` Marker @ 360° RandYaw **`60.0%`**, Demo #7 4.6cm Stacking **`56.0%`**, Demo #15 `RAIL` Block→Plate **`52.0%`**.
 

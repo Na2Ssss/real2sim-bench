@@ -403,7 +403,7 @@ def _run_one_v8_ep(args: tuple) -> dict:
     mon = RolloutMonitor(m, target_body_name=tspec["src_body"]); mon.reset(d)
     client = v4.V4BridgeClient(port=port)
 
-    max_ticks = 210; exec_k = 6
+    max_ticks = 210; exec_k = int(os.environ.get("R2S_EXEC_K", "6"))
     q_cmd = q_ref.copy(); p_ee_prev = 0.5 * (d.xpos[lp] + d.xpos[rp]).copy()
     chunk_p_targets = None; chunk_R_targets = None; chunk_g_targets = None; chunk_idx = exec_k
     success_hold = 0
